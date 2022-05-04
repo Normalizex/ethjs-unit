@@ -1,17 +1,6 @@
 ## ethjs-unit
 
 <div>
-  <!-- Dependency Status -->
-  <a href="https://david-dm.org/ethjs/ethjs-unit">
-    <img src="https://david-dm.org/ethjs/ethjs-unit.svg"
-    alt="Dependency Status" />
-  </a>
-
-  <!-- devDependency Status -->
-  <a href="https://david-dm.org/ethjs/ethjs-unit#info=devDependencies">
-    <img src="https://david-dm.org/ethjs/ethjs-unit/dev-status.svg" alt="devDependency Status" />
-  </a>
-
   <!-- Build Status -->
   <a href="https://travis-ci.org/ethjs/ethjs-unit">
     <img src="https://travis-ci.org/ethjs/ethjs-unit.svg"
@@ -20,7 +9,7 @@
 
   <!-- NPM Version -->
   <a href="https://www.npmjs.org/package/ethjs-unit">
-    <img src="http://img.shields.io/npm/v/ethjs-unit.svg"
+    <img src="http://img.shields.io/npm/v/@normalizex/ethjs-unit.svg"
     alt="NPM version" />
   </a>
 
@@ -41,29 +30,42 @@ A simple module for handling Ethereum unit convertion.
 
 ## Install
 
+Using npm:
+```console
+npm install  @normalizex/ethjs-unit
 ```
-npm install --save ethjs-unit
+Using yarn:
+```console
+yarn add @normalizex/ethjs-unit
 ```
 
 ## Usage
 
 ```js
-const unit = require('ethjs-unit');
+const unit = require('@normalizex/ethjs-unit');
 
-var val1 = unit.toWei(249824778, 'ether');
+unit.toWei(249824778, 'ether');
+// Result: '249824778000000000000000000'
 
-// result <BN ...> 249824778000000000000000000
+unit.fromWei('249824778000000000000000000', 'ether');
+// Result: '249824778'
+```
 
-var val2 = unit.fromWei('249824778000000000000000000', 'ether');
+##### For non-standard unit values ​​that are not in unitMap
+```js
+unit.toWeiByDecimals('24032190.064558267259', 12);
+// Result '24032190064558267259'
 
-// result '249824778'
+unit.fromWeiByDecimals('24032190064558267259', 12);
+// Result: '24032190.064558267259'
+
 ```
 
 ## About
 
 A port from the `web3.js` library, that just handles the unit convertion between the various types of Ethereum currency units.
 
-Note, the `toWei` returns a BN instance while `fromWei` always returns a string number.
+`toWei`, `fromWei`, `toWeiByDecimals`, `fromWeiByDecimals` allways return string
 
 ## Amorphic Data Formatting
 
@@ -72,10 +74,13 @@ Note, the `toWei` returns a BN instance while `fromWei` always returns a string 
 ## Methods Available & Objects
 
 ```
-unitMap         { unitName: singleUnitWeiValue, ... }
-getValueOfUnit  <Function (unit) : (BN)>
-toWei           <Function (value, unit) : (BN)>
-fromWei         <Function (value, unit) : (String)>
+unitMap           { unitName: singleUnitWeiValue, ... }
+getValueOfUnit    <Function (unit) : (BN)>
+toWei             <Function (value, unit) : (String)>
+toWeiByDecimals   <Function (value, unit) : (String)>
+fromWei           <Function (value, unit) : (String)>
+fromWeiByDecimals <Function (value, unit) : (String)>
+
 ```
 
 ## Supported Units

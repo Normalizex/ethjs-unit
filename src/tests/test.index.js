@@ -10,9 +10,9 @@ function testRandomValueAgainstWeb3ToWei(negative) {
   const stringTestValue = `${negative ? '-' : ''}${String(Math.floor((Math.random() * 100000000000000000) + 1))}`;
   const randomunitsType = Object.keys(units.unitMap)[Math.floor((Math.random() * (totalTypes - 1)) + 1)];
   const unitsValue = units.toWei(stringTestValue, randomunitsType);
-  const web3Value = new BigNumber(web3.toWei(stringTestValue, randomunitsType));
+  const web3Value = web3.toWei(stringTestValue, randomunitsType);
 
-  // it(`toWei should work like web3 val ${unitsValue.toString(10)} should equal ${web3Value.toString(10)}`, () => {
+  // it(`toWei should work like web3 val ${unitsValue} should equal ${web3Value}`, () => {
   assert.deepEqual(unitsValue, web3Value);
   // });
 }
@@ -39,39 +39,39 @@ describe('getValueOfUnit', () => {
 
 describe('toWei', () => {
   it('should handle edge cases', () => {
-    assert.equal(units.toWei(0, 'wei').toString(10), '0');
-    assert.equal(units.toWei('0.0', 'wei').toString(10), '0');
-    assert.equal(units.toWei('.3', 'ether').toString(10), '300000000000000000');
+    assert.equal(units.toWei(0, 'wei'), '0');
+    assert.equal(units.toWei('0.0', 'wei'), '0');
+    assert.equal(units.toWei('.3', 'ether'), '300000000000000000');
     assert.throws(() => units.toWei('.', 'wei'), Error);
     assert.throws(() => units.toWei('1.243842387924387924897423897423', 'ether'), Error);
     assert.throws(() => units.toWei('8723.98234.98234', 'ether'), Error);
   });
 
   it('should return the correct value', () => {
-    assert.equal(units.toWei(1, 'wei').toString(10), '1');
-    assert.equal(units.toWei(1, 'kwei').toString(10), '1000');
-    assert.equal(units.toWei(1, 'Kwei').toString(10), '1000');
-    assert.equal(units.toWei(1, 'babbage').toString(10), '1000');
-    assert.equal(units.toWei(1, 'mwei').toString(10), '1000000');
-    assert.equal(units.toWei(1, 'Mwei').toString(10), '1000000');
-    assert.equal(units.toWei(1, 'lovelace').toString(10), '1000000');
-    assert.equal(units.toWei(1, 'gwei').toString(10), '1000000000');
-    assert.equal(units.toWei(1, 'Gwei').toString(10), '1000000000');
-    assert.equal(units.toWei(1, 'shannon').toString(10), '1000000000');
-    assert.equal(units.toWei(1, 'szabo').toString(10), '1000000000000');
-    assert.equal(units.toWei(1, 'finney').toString(10), '1000000000000000');
-    assert.equal(units.toWei(1, 'ether').toString(10), '1000000000000000000');
-    assert.equal(units.toWei(1, 'kether').toString(10), '1000000000000000000000');
-    assert.equal(units.toWei(1, 'grand').toString(10), '1000000000000000000000');
-    assert.equal(units.toWei(1, 'mether').toString(10), '1000000000000000000000000');
-    assert.equal(units.toWei(1, 'gether').toString(10), '1000000000000000000000000000');
-    assert.equal(units.toWei(1, 'tether').toString(10), '1000000000000000000000000000000');
+    assert.equal(units.toWei(1, 'wei'), '1');
+    assert.equal(units.toWei(1, 'kwei'), '1000');
+    assert.equal(units.toWei(1, 'Kwei'), '1000');
+    assert.equal(units.toWei(1, 'babbage'), '1000');
+    assert.equal(units.toWei(1, 'mwei'), '1000000');
+    assert.equal(units.toWei(1, 'Mwei'), '1000000');
+    assert.equal(units.toWei(1, 'lovelace'), '1000000');
+    assert.equal(units.toWei(1, 'gwei'), '1000000000');
+    assert.equal(units.toWei(1, 'Gwei'), '1000000000');
+    assert.equal(units.toWei(1, 'shannon'), '1000000000');
+    assert.equal(units.toWei(1, 'szabo'), '1000000000000');
+    assert.equal(units.toWei(1, 'finney'), '1000000000000000');
+    assert.equal(units.toWei(1, 'ether'), '1000000000000000000');
+    assert.equal(units.toWei(1, 'kether'), '1000000000000000000000');
+    assert.equal(units.toWei(1, 'grand'), '1000000000000000000000');
+    assert.equal(units.toWei(1, 'mether'), '1000000000000000000000000');
+    assert.equal(units.toWei(1, 'gether'), '1000000000000000000000000000');
+    assert.equal(units.toWei(1, 'tether'), '1000000000000000000000000000000');
 
-    assert.equal(units.toWei(1, 'kwei').toString(10), units.toWei(1, 'femtoether').toString(10));
-    assert.equal(units.toWei(1, 'szabo').toString(10), units.toWei(1, 'microether').toString(10));
-    assert.equal(units.toWei(1, 'finney').toString(10), units.toWei(1, 'milliether').toString(10));
-    assert.equal(units.toWei(1, 'milli').toString(10), units.toWei(1, 'milliether').toString(10));
-    assert.equal(units.toWei(1, 'milli').toString(10), units.toWei(1000, 'micro').toString(10));
+    assert.equal(units.toWei(1, 'kwei'), units.toWei(1, 'femtoether'));
+    assert.equal(units.toWei(1, 'szabo'), units.toWei(1, 'microether'));
+    assert.equal(units.toWei(1, 'finney'), units.toWei(1, 'milliether'));
+    assert.equal(units.toWei(1, 'milli'), units.toWei(1, 'milliether'));
+    assert.equal(units.toWei(1, 'milli'), units.toWei(1000, 'micro'));
 
     assert.throws(() => { units.toWei(1, 'wei1'); }, Error);
   });

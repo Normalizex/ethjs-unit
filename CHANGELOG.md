@@ -1,3 +1,10 @@
+# 0.1.7 -- ethjs-unit
+
+1. Update toWei
+2. Add toWeiByDecimals
+3. Add fromWeiByDecimals
+4. Update tests
+
 # 0.1.5 -- update bn formatting
 
 1. Update bn formatting
