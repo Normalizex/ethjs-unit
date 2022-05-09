@@ -1,4 +1,4 @@
-const units = require('../index.js'); // eslint-disable-line
+const units = require('../dist/index.js'); // eslint-disable-line
 const BigNumber = require('bn.js'); // eslint-disable-line
 const ActualBigNumber = require('bignumber.js');
 const Web3 = require('web3'); // eslint-disable-line
@@ -74,32 +74,6 @@ describe('toWei', () => {
     assert.equal(units.toWei(1, 'milli'), units.toWei(1000, 'micro'));
 
     assert.throws(() => { units.toWei(1, 'wei1'); }, Error);
-  });
-});
-
-describe('numberToString', () => {
-  it('should handle edge cases', () => {
-    // assert.throws(() => units.numberToString(null), Error);
-    assert.throws(() => units.numberToString(undefined), Error);
-    // assert.throws(() => units.numberToString(NaN), Error);
-    assert.throws(() => units.numberToString({}), Error);
-    assert.throws(() => units.numberToString([]), Error);
-    assert.throws(() => units.numberToString('-1sdffsdsdf'), Error);
-    assert.throws(() => units.numberToString('-0..-...9'), Error);
-    assert.throws(() => units.numberToString('fds'), Error);
-    assert.throws(() => units.numberToString(''), Error);
-    assert.throws(() => units.numberToString('#'), Error);
-    assert.equal(units.numberToString(55), '55');
-    assert.equal(units.numberToString(1), '1');
-    assert.equal(units.numberToString(-1), '-1');
-    assert.equal(units.numberToString(0), '0');
-    assert.equal(units.numberToString(-0), '0');
-    assert.equal(units.numberToString(new ActualBigNumber(10.1)), '10.1');
-    assert.equal(units.numberToString(new ActualBigNumber(10000)), '10000');
-    assert.equal(units.numberToString(new BigNumber(10000)), '10000');
-    assert.equal(units.numberToString(new BigNumber('-1')), '-1');
-    assert.equal(units.numberToString(new BigNumber('1')), '1');
-    assert.equal(units.numberToString(new BigNumber(0)), '0');
   });
 });
 

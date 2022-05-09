@@ -1,3 +1,8 @@
+# 0.1.8 -- ethjs-unit
+
+1. TypeScript support
+2. Refactor
+
 # 0.1.7 -- ethjs-unit
 
 1. Update toWei
